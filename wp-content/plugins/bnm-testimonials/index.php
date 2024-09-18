@@ -16,10 +16,39 @@ function debug_to_console($data)
     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }
 
-
-
 add_shortcode('bnmtestimonials', 'wpbnm_shortcode');
 
+add_action('wp_enqueue_scripts', 'bnm_testimonial_assets');
+function bnm_testimonial_assets()
+{
+    wp_register_style('swiper', plugins_url('/css/swiper.css', __FILE__));
+    wp_register_script(
+        'swiper',
+        plugins_url('/js/swiper.js', __FILE__),
+        array(),
+        '1.0.0',
+        array(
+            'strategy' => 'defer'
+        )
+    );
+
+    wp_register_style('bnm-swiper', plugins_url('/css/bnm-swiper.css', __FILE__));
+    wp_register_script(
+        'bnm-swiper',
+        plugins_url('/js/bnm-swiper.js', __FILE__),
+        array(),
+        '1.0.0',
+        array(
+            'strategy' => 'defer'
+        )
+    );
+
+    wp_enqueue_style('swiper');
+    wp_enqueue_script('swiper');
+
+    wp_enqueue_style('bnm-swiper');
+    wp_enqueue_script('bnm-swiper');
+}
 
 function wpbnm_shortcode($atts = [], $content = "")
 {
@@ -29,15 +58,22 @@ function wpbnm_shortcode($atts = [], $content = "")
         'posts_per_page' => 10,
     );
     $loop = new WP_Query($args);
-    $content = '<div>';
+    $content = '<div class="swiper"><div class="swiper-wrapper bnm-swiper">';
     while ($loop->have_posts()) {
         $loop->the_post();
-        $content .= '<div class="entry-content">';
-        $content .= get_the_title();
-        $content .= get_the_content(); 
+        $content .= '<div class="swiper-slide">';
+        $content .= '<div class="bnm-testimonial_content">'.get_the_content().'</div>';
+        $content .= '<h5 class="bnm-testimonial_name">'.get_the_title().'</h5>';
+
         $content .= '</div>';
     }
     $content .= '</div>';
+
+    $content .= '<div class="swiper-pagination"></div>';
+    $content .= '<div class="swiper-button-prev"></div>';
+    $content .= '<div class="swiper-button-next"></div>';
+    $content .= '</div>';
+
     return $content;
 }
 
@@ -70,6 +106,5 @@ function bnm_custom_testimonial_post()
     );
 }
 add_action('init', 'bnm_custom_testimonial_post');
-
 
 

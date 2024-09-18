@@ -1,0 +1,25 @@
+.bnm-swiper {
+  background-color: #0a3200;
+  /* width: 600px; */
+  /* height: 1300px; */
+  color: #faebdb;
+}
+
+.bnm-swiper .img {
+  float: left;
+  padding-right: 16px;
+  padding-bottom: 16px;
+}
+
+.bnm-testimonial_name {
+  float: right;
+  padding-right: 24px;
+}
+
+.bnm-testimonial_content {
+  padding: 16px 48px;
+}
+
+.swiper-button-next {
+  color: white;
+}
