@@ -84,7 +84,7 @@ function wpbnm_shortcode($atts = [], $content = "")
         $content .= '<div class="bnm-testimonial-descriptors">';
         $content .= '<div class="bnm-testimonial_name">' . get_the_title() . '</div>';
         $content .= '<div class="bnm-testimonial_descriptor">' . $descriptor_value . '</div>';
-        $content .= '<div class="bnm-testimonial_source">Source&mdash; <a href="' . $url_value . ' target="_blank"">' . $source_value . '</a></div>';
+        $content .= '<div class="bnm-testimonial_source">Source&mdash; <a href="' . $url_value . '" target="_blank">' . $source_value . '</a></div>';
         $content .= '</div>';
         $content .= '</div>';
         $content .= '</div>';
